@@ -62,6 +62,7 @@ public static class Arrays
 
         ///<My Thought Process>
         /// First i will create the list with integers.
+        /// Then normalise amount
         /// Use Modulo to get the wrap positions
         /// Take last amount elements
         /// Remove last amount elements
