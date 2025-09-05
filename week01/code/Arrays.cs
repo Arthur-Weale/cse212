@@ -38,7 +38,7 @@ public static class Arrays
         {
             multiplesArray[i] = number * (i + 1);
         }
-        Debug.WriteLine("<double>{"+ string.Join(", ", multiplesArray) +"}");
+        Debug.WriteLine("<double>{" + string.Join(", ", multiplesArray) + "}");
         return multiplesArray; // replace this return statement with your own
     }
 
@@ -58,19 +58,22 @@ public static class Arrays
 
         ///<My Thought Process>
         /// First i will create the list with integers.
-        /// Then i will create an new empty list with empty slots .
-        /// I will create a for loop which will iterate through the list.
-        /// While it iterates i will take the current value of the current index and shift it by the amount and insert it into a new list.
+        /// Use Modulo to get the wrap positions
+        /// Take last amount elements
+        /// Remove last amount elements
+        /// Insert slice at beginning
         /// I will get the new index position using modulo.
         /// </My Thought Process>
 
-        List<int> newList = new List<int>(new int[data.Count]);
+        amount = amount % data.Count;
 
-        for (int i = 0; i < data.Count; i++)
-        {
-            int newIndex = (i + amount) % data.Count;
-            newList[newIndex] = data[i];
-        }
-        Console.WriteLine("List<int>{" + string.Join(" , ", newList) + "}");
+        if (amount == 0) return;  // nothing to rotate
+
+        List<int> slice = data.GetRange(data.Count - amount, amount);
+
+        data.RemoveRange(data.Count - amount, amount);
+
+        data.InsertRange(0, slice);
+        Console.WriteLine("List<int>{"+ string.Join(" , ", data)+ "}");
     }
 }
