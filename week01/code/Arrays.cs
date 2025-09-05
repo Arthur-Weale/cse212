@@ -32,10 +32,14 @@ public static class Arrays
         /// Inside the loop i will multiply the current count of the loop to out number to get the multiple.
         /// I will then append the results into an array created.
         /// </My Thought Process>
-
+        
+        ///Step 1: Create an array of the desired length to hold the multiples
         var multiplesArray = new double[length];
+        /// Step 2: Fill the array with multiples of the given number
         for (int i = 0; i < length; i++)
         {
+            /// i starts at 0, so the first multiple is number * 1
+            /// Each next multiple increases by 1 * number, 2 * number, and so on .....
             multiplesArray[i] = number * (i + 1);
         }
         Debug.WriteLine("<double>{" + string.Join(", ", multiplesArray) + "}");
@@ -65,15 +69,27 @@ public static class Arrays
         /// I will get the new index position using modulo.
         /// </My Thought Process>
 
-        amount = amount % data.Count;
+        // Step 1: Make the amount normal so it doesn't exceed the list length
+        // Example: rotating by 12 on a 9-element list is the same as rotating by 3
+        amount = amount % data.Count;  
 
-        if (amount == 0) return;  // nothing to rotate
+        // Step 2: If amount is 0, no rotation is needed
+        if (amount == 0) return;  
 
+        // Step 3: Take the last 'amount' elements that will wrap around to the front
+        // Example: if amount = 3, last 3 elements [7,8,9] will move to the beginning
         List<int> slice = data.GetRange(data.Count - amount, amount);
 
+        // Step 4: Remove these last 'amount' elements from the original list
+        // Now the remaining list has 'empty space' at the beginning for the slice
         data.RemoveRange(data.Count - amount, amount);
 
+        // Step 5: Insert the slice at the beginning of the list
+        // This fills the empty positions at the start, completing the rotation
         data.InsertRange(0, slice);
-        Console.WriteLine("List<int>{"+ string.Join(" , ", data)+ "}");
-    }
+
+        // At this point, every element has effectively moved 'amount' positions to the right
+        // The last 'amount' elements wrapped around to the front
+            Console.WriteLine("List<int>{"+ string.Join(" , ", data)+ "}");
+        }
 }
