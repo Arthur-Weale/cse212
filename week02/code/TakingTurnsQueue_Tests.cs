@@ -12,6 +12,8 @@ public class TakingTurnsQueueTests
     // run until the queue is empty
     // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, Sue, Tim, Tim
     // Defect(s) Found: 
+
+    //TestTakingTurnsQueue_FiniteRepetition: This test failed because the expected player was Tim, but the actual result returned was Bob. This shows that the queue implementation does not correctly handle the changing of turns when players have a finite number of turns.
     public void TestTakingTurnsQueue_FiniteRepetition()
     {
         var bob = new Person("Bob", 2);
@@ -44,6 +46,8 @@ public class TakingTurnsQueueTests
     // After running 5 times, add George with 3 turns.  Run until the queue is empty.
     // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, George, Sue, Tim, George, Tim, George
     // Defect(s) Found: 
+
+    //TestTakingTurnsQueue_AddPlayerMidway: The test expected Tim but returned Bob, showing that inserting a player into the middle of the queue did not work as intended. The queue likely failed to maintain the correct order after the insertion.
     public void TestTakingTurnsQueue_AddPlayerMidway()
     {
         var bob = new Person("Bob", 2);
@@ -86,6 +90,8 @@ public class TakingTurnsQueueTests
     // Run 10 times.
     // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, Sue, Tim, Tim
     // Defect(s) Found: 
+
+    //TestTakingTurnsQueue_ForeverZero: The expected result was Tim, but the function returned Sue. This suggests that the queue logic does not correctly handle a player whose number of turns is zero, causing an incorrect player to be returned.
     public void TestTakingTurnsQueue_ForeverZero()
     {
         var timTurns = 0;
@@ -117,6 +123,8 @@ public class TakingTurnsQueueTests
     // Run 10 times.
     // Expected Result: Tim, Sue, Tim, Sue, Tim, Sue, Tim, Tim, Tim, Tim
     // Defect(s) Found: 
+
+    //TestTakingTurnsQueue_ForeverNegative: This test also expected Tim but returned Sue, indicating that the queue does not correctly handle a player with negative turns. The rotation logic handling is likely the problem in this scenario.
     public void TestTakingTurnsQueue_ForeverNegative()
     {
         var timTurns = -3;
