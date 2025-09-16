@@ -25,6 +25,26 @@
     private static int CountDuplicates(int[] data)
     {
         // Add code here.
-        return 0;
+        var set = new HashSet<int>{};
+        var newList = new List<int> {};
+        var duplicates = 0;
+        foreach (var item in data)
+        {
+            if (set.Contains(item))
+            {
+                duplicates++;
+                newList.Add(item);
+            }
+            else
+            {
+                set.Add(item);
+            }
+        }
+        Console.WriteLine("The duplicates are { " + string.Join(", ", newList) + " }");
+        var newListCount = newList.Count();
+        Console.WriteLine($"The new list has {newListCount}");
+        // var setCount = set.Count();
+        // var arrayCount = data.Count();
+        return duplicates;
     }
 }
