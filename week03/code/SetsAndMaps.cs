@@ -1,5 +1,5 @@
 using System.Text.Json;
-
+using System.Linq;
 public static class SetsAndMaps
 {
     /// <summary>
@@ -22,7 +22,21 @@ public static class SetsAndMaps
     public static string[] FindPairs(string[] words)
     {
         // TODO Problem 1 - ADD YOUR CODE HERE
-        return [];
+        var newSet = new HashSet<string>();
+        var pairsList = new List<string>();
+
+        foreach (string item in words)
+        {
+            var reverse = new string(item.Reverse().ToArray());
+            if (newSet.Contains(reverse))
+            {
+                string newSymmetryPair = $"{item} & {reverse}";
+                pairsList.Add(newSymmetryPair);
+            }
+            newSet.Add(item);
+        }
+        var pairsArray = pairsList.ToArray(); 
+        return  pairsArray;
     }
 
     /// <summary>
