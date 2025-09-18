@@ -27,7 +27,7 @@ public static class SetsAndMaps
 
         foreach (string item in words)
         {
-            var reverse = new string(item.Reverse().ToArray());
+            var reverse = new string(new char[]{item[1], item[0]});
             if (newSet.Contains(reverse))
             {
                 string newSymmetryPair = $"{item} & {reverse}";
