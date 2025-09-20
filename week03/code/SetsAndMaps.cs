@@ -89,9 +89,37 @@ public static class SetsAndMaps
     /// </summary>
     public static bool IsAnagram(string word1, string word2)
     {
-        // TODO Problem 3 - ADD YOUR CODE HERE
-        return false;
+        
+        int len1 = word1.Count(c => c != ' ');
+        int len2 = word2.Count(c => c != ' ');
+        if (len1 != len2) return false;
+
+        var charCounts = new Dictionary<char, int>();
+
+        
+        foreach (char c in word1)
+        {
+            if (c == ' ') continue;
+            char lower = char.ToLower(c);
+            if (charCounts.ContainsKey(lower))
+                charCounts[lower]++;
+            else
+                charCounts[lower] = 1;
+        }
+
+        
+        foreach (char c in word2)
+        {
+            if (c == ' ') continue;
+            char lower = char.ToLower(c);
+            if (!charCounts.ContainsKey(lower)) return false;
+            charCounts[lower]--;
+            if (charCounts[lower] < 0) return false; 
+        }
+
+        return true;
     }
+
 
     /// <summary>
     /// This function will read JSON (Javascript Object Notation) data from the 
